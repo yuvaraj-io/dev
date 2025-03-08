@@ -45,7 +45,7 @@ function App() {
         />
         </div>
       <div className='fixed w-full z-10 bottom-0 bg-gray-800'>
-        <Footer/>
+        <Footer/> 
       </div>
     </div>
   );
