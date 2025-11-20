@@ -9,7 +9,6 @@ export default function AboutMe() {
     const navigate = useNavigate();
 
     const redirectToLink = (path) => {
-        debugger
         navigate(path)
     }
     return (

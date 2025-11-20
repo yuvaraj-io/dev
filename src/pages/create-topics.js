@@ -160,6 +160,7 @@ export default function CreateTopics() {
           <Heading text="Collections" />
           <Collection
             collections={collections}
+            sectionCollectionData={sectionCollectionData}
             selectedCollections={selectedCollections}
             onToggle={markCollections}
           />

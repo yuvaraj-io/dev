@@ -1,8 +1,10 @@
 import { useEffect, useState } from "react";
-import { useFetchCollectionsQuery, useFetchBlogQuery } from "../store/apis/blog";
+import { useFetchCollectionsQuery, useFetchBlogQuery, useFetchSectionsQuery, useFetchSectionCollectionsQuery } from "../store/apis/blog";
 import { useSearchParams } from "react-router-dom";
 import Collection from "./learn/collection";
 import BlogTemplate from "./learn/blogTemplate";
+import SectionFormat from "./section-aligns/section-format";
+import SectionView from "./learn/sectionView";
 
 export default function Blogs() {
   const [searchParams, setSearchParams] = useSearchParams();
@@ -12,24 +14,26 @@ export default function Blogs() {
   const [blogID, setBlogID] = useState(urlBlogID || null); // Local state for blogID
 
   // Fetch Collections
-  const { data: collections, error, isLoading } = useFetchCollectionsQuery(learnID, { skip: !learnID });
-
+  // const { data: collections, error, isLoading } = useFetchCollectionsQuery(learnID, { skip: !learnID });
+  // const { data: sectionData, isLoading, error } = useFetchSectionsQuery(learnID, { skip: !learnID });
   // Fetch Blog only when blogID is available
+  console.log(blogID);
   const { data: blogData, error: blogError, isLoading: blogLoading } = useFetchBlogQuery(blogID, { skip: !blogID });
-
+  const { data: sectionCollectionData, isLoading, error } = useFetchSectionCollectionsQuery(learnID, { skip: !learnID });
+  
   // Effect to fetch blog after collections load
   useEffect(() => {
-    if (collections && collections.length > 0) {
-      const firstBlogID = collections[0].id; 
+    console.log(sectionCollectionData)
+    if (sectionCollectionData && sectionCollectionData.length > 0) {
+      const firstBlogID = sectionCollectionData[0] && sectionCollectionData[0].collections[0] && sectionCollectionData[0].collections[0];   
       handleBlogSelect(firstBlogID);
       // setSearchParams({ id: learnID, blog: firstBlogID });
     }
-    
-  }, [collections]);
+  }, [sectionCollectionData]);
 
   // Handle click on a collection item
-  const handleBlogSelect = (topics_id) => {
-    const encodedBlogID = btoa(topics_id);
+  const handleBlogSelect = (blogs) => {
+    const encodedBlogID = btoa(blogs.collectionId);
     setBlogID(encodedBlogID);
     setSearchParams({ id: learnID, blog: encodedBlogID });
   };
@@ -40,8 +44,32 @@ export default function Blogs() {
     collectionContent = <div>Loading collections...</div>;
   } else if (error) {
     collectionContent = <div>Error loading collections</div>;
-  } else if (collections) {
-    collectionContent = <Collection allCollection={collections} blogSelect={handleBlogSelect} />
+  } else if (sectionCollectionData) {
+    // collectionContent = <Collection allCollection={collections} blogSelect={handleBlogSelect} />
+    collectionContent = <>
+       {sectionCollectionData &&
+            sectionCollectionData.map(c => (
+              <div
+                key={c.id}
+                className="text-left mt-4 p-1 px-4 text-2.5r mob:text-1.5r rounded-lg text-purple-500"
+              >
+                {c.id} {c.section_name}
+
+                {c.collections.map(s => (
+                  <div
+                    key={s.id}
+                    className={
+                       `text-left mt-4 p-1 px-4 text-2.5r mob:text-1.5r rounded-lg text-white 
+                        ${ btoa(s.collectionId) === blogID && "bg-gray-500"}`
+                    }
+                    onClick={() => handleBlogSelect(s)}
+                  >
+                   {s.collection_title}
+                  </div>
+                ))}
+              </div>
+            ))}
+    </>
   }
 
   // Blog Content

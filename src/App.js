@@ -35,6 +35,7 @@ function App() {
             <Route path="/learn" element={<Learn />} />
             <Route path="/write" element={<Write />} />
             <Route path="/topics" element={<CreateTopics />} />
+            <Route path="/sections" element={<CreateTopics />} />
             <Route path="/edit" element={<Edit />} />
           </Routes>
 

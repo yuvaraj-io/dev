@@ -23,7 +23,6 @@ export default function Blogs() {
     const data = { blogContent: divContent};
  
     const sendCollectionAndPublish = async () => {
-        debugger
         const blogResponse = await sendBlog({...data, blogTitle: blogData && blogData[0]?.heading, collections_id: atob(urlBlogID)});
         // dispatch({ type:'reset' });  // Reset the form state after publishing the blog.
         console.log(blogResponse);
