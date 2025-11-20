@@ -4,6 +4,7 @@ import React, { useState, useRef, useEffect } from "react";
 import "./custom.module.css";
 
 const MediumLikeEditor = ({handleChange, value, index, remove}) => {
+  
   const [showToolbar, setShowToolbar] = useState(false);
   const [toolbarPosition, setToolbarPosition] = useState({ top: 0, left: 0 });
   const [showLinkInput, setShowLinkInput] = useState(false);
@@ -12,7 +13,7 @@ const MediumLikeEditor = ({handleChange, value, index, remove}) => {
 
   useEffect(() => {
     if (value !== undefined) {
-      editorRef.innerHTML = value.content;
+      editorRef.current.innerHTML = value.content;
     }
   }, [value]); 
 

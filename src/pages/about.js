@@ -20,7 +20,7 @@ export default function AboutMe() {
 
             <p className="pt-3r leading-tight font-extralight text-2r">
                 Hey, I’m <span className='text-purple-400'>Yuvaraj</span>, a Frontend Developer based in India. I studied Pre-University and earned a B.Com degree from Christ University.
-                With 6.5 years of experience, I’ve worked 5+ years, product-based and 1+ year, service-based. My time in the product space taught me the core aspects of web application development, while my service-based experience refined my skills in delivering projects and client communication.
+                With 7+ years of experience, I’ve worked 5+ years, product-based and 2 year, service-based. My time in the product space taught me the core aspects of web application development, while my service-based experience refined my skills in delivering projects and client communication.
 
                 {/* Hey, I'm Yuvaraj – a passionate Frontend Engineer with 6.5+ years of experience.
             I specialize in <span className='text-purple-400'>Angular, Vue.js, and React</span>, helping businesses build, optimize,

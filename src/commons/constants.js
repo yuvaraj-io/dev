@@ -1,29 +1,31 @@
-
+const origin = (url) => {
+    return `https://${url}.yuvaraj.io`
+}
 export const socials = {
-    github: 'https://github.com/Yuvaraj-2001',
+    github: 'https://github.com/yuvaraj-io',
     linkedin: 'https://www.linkedin.com/in/yuvaraj-s-32326b176/',
     instagram: 'https://www.instagram.com/code.yuvaraj/',
     medium: 'https://medium.com/@yuvidev/',
-    stackblitz: 'https://stackblitz.com/@Yuvaraj-2001/collections/'
+    stackblitz: 'https://stackblitz.com/@yuvaraj.io/collections/'
 }
 
 export const featured = {
     tred: {
-        link: "https://tred.yuvidev.in",
+        link: origin('tred'),
         img: '/assets/small-projects/tred.png',
         skills: ['HTML','CSS', 'JAVASCRIPT', 'BOOTSTRAP'],
         mainHeading: 'Tred',
         subtitle: 'Tred, the attrendance application built on top of javascript localstorage',
     },
     pitchpro: {
-        link: "https://pitchpro.yuvidev.in",
+        link: origin('pitchpro'),
         img: '/assets/portfolio/pitchpro.png',
         skills: ['HTML','CSS', 'JAVASCRIPT', 'BOOTSTRAP'],
         mainHeading: 'Pitchpro',
         subtitle: 'A website for startup that does pitch proposals, Help them and connect to appropriate connections',
     },
     yuvidev: {
-        link: "https://old.yuvidev.in",
+        link: origin('old'),
         img: '/assets/portfolio/yuvaraj.png',
         skills: ['HTML','CSS', 'JAVASCRIPT', 'BOOTSTRAP'],
         mainHeading: 'Yuvidev',
@@ -33,42 +35,42 @@ export const featured = {
 
 export const portfolios = [
     {
-        link: "https://pitchpro.yuvidev.in",
+        link: origin('pitchpro'),
         img: '/assets/portfolio/pitchpro.png',
         skills: ['HTML','CSS', 'JAVASCRIPT', 'BOOTSTRAP'],
         mainHeading: 'Pitchpro',
         subtitle: 'A website for startup that does pitch proposals, Help them and connect to appropriate connections',
     },
     {
-        link: "https://old.yuvidev.in",
+        link: origin('old'),
         img: '/assets/portfolio/yuvaraj.png',
         skills: ['HTML','CSS', 'JAVASCRIPT', 'BOOTSTRAP'],
         mainHeading: 'Yuvidev',
         subtitle: "Ohh, it's my old website. Just a basic website :)",
     },
     {
-        link: "https://fotofactory.yuvidev.in",
+        link: origin('fotofactory'),
         img: '/assets/portfolio/fotofactory.png',
         skills: ['HTML','CSS', 'JAVASCRIPT', 'BOOTSTRAP'],
         mainHeading: 'Fotofactory',
         subtitle: "Website to my friend, to reach out customers for photoshoots",
     },
     {
-        link: "https://ganesha.yuvidev.in",
+        link: origin('ganesha'),
         img: '/assets/portfolio/ganesha.png',
         skills: ['HTML','CSS', 'JAVASCRIPT', 'BOOTSTRAP'],
         mainHeading: 'Ganesh Idols',
         subtitle: "Created page UI, to attract customers for my seasonal small business",
     },
     {
-        link: "https://guruguide.yuvidev.in",
+        link: origin('guruguide'),
         img: '/assets/portfolio/guruguide.png',
         skills: ['HTML','CSS', 'JAVASCRIPT', 'BOOTSTRAP'],
         mainHeading: 'Guruguide',
         subtitle: "To spread knowledge on interviews, built this to get leads from students",
     },
     {
-        link: "https://getnewfiber.yuvidev.in",
+        link: origin('getnewfiber'),
         img: '/assets/portfolio/getnewfiber.png',
         skills: ['HTML','CSS', 'JAVASCRIPT', 'BOOTSTRAP'],
         mainHeading: 'Getnewfiber',
@@ -78,35 +80,35 @@ export const portfolios = [
 
 export const projects = [
     {
-        link: "https://debug.yuvidev.in",
+        link:  origin('debug'),
         img: '/assets/small-projects/debugger.png',
         skills: ['HTML','CSS', 'JAVASCRIPT'],
         mainHeading: 'Debugger',
         subtitle: 'App that generates a debugger for javascript functions to understand application efficiency',
     },
     {
-        link: "https://dice.yuvidev.in",
+        link:  origin('dice'),
         img: '/assets/small-projects/dice.png',
         skills: ['HTML','CSS', 'JAVASCRIPT'],
         mainHeading: 'Dice',
         subtitle: 'Mini project to generate random dice number to play',
     },
     {
-        link: "https://rem.yuvidev.in",
+        link: origin('rem'),
         img: '/assets/small-projects/rem.png',
         skills: ['HTML','CSS', 'JAVASCRIPT'],
         mainHeading: 'Rem',
         subtitle: 'Todo list app for grouping the list to track',
     },
     {
-        link: "https://snake.yuvidev.in",
+        link: origin('snake'),
         img: '/assets/small-projects/rem.png',
         skills: ['VUE 3.0', 'CSS'],
         mainHeading: 'Snake and Ladders',
         subtitle: 'Snake and ladder game to play with group',
     },
     {
-        link: "https://tred.yuvidev.in",
+        link:  origin('tred'),
         img: '/assets/small-projects/tred.png',
         skills: ['HTML','CSS', 'JAVASCRIPT', 'BOOTSTRAP'],
         mainHeading: 'Tred',
@@ -130,7 +132,7 @@ export const skills = {
     },
     npm:{
         heading: 'npm packages',
-        skills : ['lodash','chartjs', 'express', 'axios']
+        skills : ['lodash','chartjs', 'express', 'axios', 'rxjs', 'redux']
     },
     tools: {
         heading: 'Tools',
@@ -228,130 +230,135 @@ export const stackblitz = {
         {
             title: "Angular v17 - features",
             description: 'Learn about the latest features of Angular, including the introduction of Angular Material, Angular Flex-Layout, and Angular CDK.',
-            url: 'https://stackblitz.com/@Yuvaraj-2001/collections/angular-v17-features'
+            url: 'https://stackblitz.com/@yuvaraj.io/collections/angular-v17-features'
         },
         {
             title: 'Angular 01: Component',
             description: 'Explore reusable, modular components that form the building blocks of Angular applications, enhancing code maintainability and scalability.',
-            url: 'https://stackblitz.com/@Yuvaraj-2001/collections/angular-component'
+            url: 'https://stackblitz.com/@yuvaraj.io/collections/angular-component'
         },
         {
             title: 'Angular 02: Directives',
             description: "Dive into Angular's powerful directives, which allow you to manipulate the DOM and extend HTML functionality, enabling dynamic and reusable templates.",
-            url:'https://stackblitz.com/@Yuvaraj-2001/collections/angular-02-directives'
+            url:'https://stackblitz.com/@yuvaraj.io/collections/angular-02-directives'
         },
         {
             title: 'Angular 03: Services',
             description: 'Learn how to create services to manage shared data, logic, and functionality across multiple components in an Angular application.',
-            url:'https://stackblitz.com/@Yuvaraj-2001/collections/angular-03-services'
+            url:'https://stackblitz.com/@yuvaraj.io/collections/angular-03-services'
         },
         {
             title: 'Angular 04: Routing',
             description: 'Implement routing in your Angular application to navigate between different views and components.',
-            url:'https://stackblitz.com/@Yuvaraj-2001/collections/angular-routing'
+            url:'https://stackblitz.com/@yuvaraj.io/collections/angular-routing'
         },
         {
             title: 'Angular 05 : Template Driven Forms',
             description: 'Learn how to create forms using Angular\'s template-driven approach, enabling user input validation and error handling.',
-            url:'https://stackblitz.com/@Yuvaraj-2001/collections/angular-05-template-driven-forms'
+            url:'https://stackblitz.com/@yuvaraj.io/collections/angular-05-template-driven-forms'
         },
         {
             title: 'Angular 06 : Reactive Form',
             description: 'Learn how to create forms using Angular\'s reactive approach, enabling user input validation and error handling.',
-            url:'https://stackblitz.com/@Yuvaraj-2001/collections/angular-reactive-form'
+            url:'https://stackblitz.com/@yuvaraj.io/collections/angular-reactive-form'
         },
         {
             title: 'Angular 07 : Pipes',
             description: 'Dive into Angular\'s powerful pipes, which transform and format data in your templates.',
-            url:'https://stackblitz.com/@Yuvaraj-2001/collections/angular-pipes'
+            url:'https://stackblitz.com/@yuvaraj.io/collections/angular-pipes'
         },
         {
             title: 'Angular 08: Http',
             description: 'Learn how to make HTTP requests in your Angular application using HttpClient, handling errors, and optimizing performance.',
-            url:'https://stackblitz.com/@Yuvaraj-2001/collections/angular-http'
+            url:'https://stackblitz.com/@yuvaraj.io/collections/angular-http'
         },
         {
             title: 'Angular 09: Signals',
             description: 'Learn how to create and manage signals in Angular, enabling communication between components and services.',
-            url:'https://stackblitz.com/@Yuvaraj-2001/collections/angular-09-signals'
+            url:'https://stackblitz.com/@yuvaraj.io/collections/angular-09-signals'
         },
         {
             title: 'Angular NGRX',
             description: 'State management library NGRX, enabling efficient and scalable state management in your Angular applications.',
-            url:'https://stackblitz.com/@Yuvaraj-2001/collections/angular-ngrx'
+            url:'https://stackblitz.com/@yuvaraj.io/collections/angular-ngrx'
         }
     ],
     "react": [
         {
             title: 'React',
             description: 'React core concepts and hooks',
-            url: 'https://stackblitz.com/@Yuvaraj-2001/collections/react'
+            url: 'https://stackblitz.com/@yuvaraj.io/collections/react'
         },
         {
             title: 'React Router',
             description: 'React Router Dom, npm package to change and manage route navigations',
-            url: 'https://stackblitz.com/@Yuvaraj-2001/collections/react-01-components'
+            url: 'https://stackblitz.com/@yuvaraj.io/collections/react-01-components'
         },
         {
             title: 'React Axios',
             description: 'Manage interceptors, http requests, implement configuration with axios',
-            url: 'https://stackblitz.com/@Yuvaraj-2001/collections/react-axios'
+            url: 'https://stackblitz.com/@yuvaraj.io/collections/react-axios'
         },
         {
             title: 'React Redux',
             description: 'Redux and React-Redux, state management library',
-            url: 'https://stackblitz.com/@Yuvaraj-2001/collections/react-redux'
+            url: 'https://stackblitz.com/@yuvaraj.io/collections/react-redux'
         },
         {
             title: 'Redux Toolkit',
             description: 'Redux Toolkit, official Redux utilities for Redux',
-            url: 'https://stackblitz.com/@Yuvaraj-2001/collections/redux-toolkit'
+            url: 'https://stackblitz.com/@yuvaraj.io/collections/redux-toolkit'
         }
     ],
     "vue": [
         {
            title: 'Vue Js',
            description: 'Learn Vue.js core concepts with plain html, css, and javascript',
-           url: 'https://stackblitz.com/@Yuvaraj-2001/collections/vue-js'
+           url: 'https://stackblitz.com/@yuvaraj.io/collections/vue-js'
         },
         {
             title: 'Vue 3.0',
             description: 'Checkot latest Vue 3.0 concepts and features',
-            url: 'https://stackblitz.com/@Yuvaraj-2001/collections/vue-3-0'
+            url: 'https://stackblitz.com/@yuvaraj.io/collections/vue-3-0'
         },
         {
             title: 'Vuetify',
             description: 'Vuetify, a Vue.js Material Design component framework',
-            url: 'https://stackblitz.com/@Yuvaraj-2001/collections/vuetify'
+            url: 'https://stackblitz.com/@yuvaraj.io/collections/vuetify'
         }
     ],
     "rxjs": [
         {
             title: 'RXJS Fundamentals',
             description: 'Rxjs core fundamentals to get started',
-            url: 'https://stackblitz.com/@Yuvaraj-2001/collections/rxjs-fundamentals'
+            url: 'https://stackblitz.com/@yuvaraj.io/collections/rxjs-fundamentals'
         },
         {
            title: 'RXJS 01: Creation Operator',
            description: 'Learn about creation operators like of, from, fromEvent etc.',
-           url: 'https://stackblitz.com/@Yuvaraj-2001/collections/rxjs-series'
+           url: 'https://stackblitz.com/@yuvaraj.io/collections/rxjs-series'
         },
         {
             title: 'RXJS 02: Pipable Operators',
             description: 'Rxjs pipable operators like combineLatest, take, takeLast etc',
-            url: 'https://stackblitz.com/@Yuvaraj-2001/collections/rxjs-02-pipable-operators'
+            url: 'https://stackblitz.com/@yuvaraj.io/collections/rxjs-02-pipable-operators'
          }
     ],
     "js":[
         {
+            title: 'Javascript Learn',
+            description: 'To Understand and Learn Javascript!',
+            url: 'https://stackblitz.com/@yuvaraj.io/collections/javascript-learn'
+        },
+        {
             title: 'Javascript Concepts',
             description: 'To refresh your javascript core concepts. Yayy!',
-            url: 'https://stackblitz.com/@Yuvaraj-2001/collections/javascript-tasks-and-concepts'
+            url: 'https://stackblitz.com/@yuvaraj.io/collections/javascript-tasks-and-concepts'
         },
         {
             title: 'Javascript Common Methods',
             description: 'Some of the common methods to help you while coding',
-            url: 'https://stackblitz.com/@Yuvaraj-2001/collections/javascript-common-methods'
+            url: 'https://stackblitz.com/@yuvaraj.io/collections/javascript-common-methods'
         }
     ]
 };

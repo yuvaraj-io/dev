@@ -79,11 +79,13 @@ function reducer(state, action) {
     }
 }
 
-function Editor({ blurChange }) {
-    const [allEditor, setEditor] = useReducer(reducer, initialState);
+function Editor({ blurChange, intialEditior }) {
+
+    const [allEditor, setEditor] = useReducer(reducer, intialEditior ?? initialState);
 
     useEffect(() => {
         blurChange(allEditor);
+        console.log('all',allEditor);
     }, [allEditor]);
 
     const removeIndex = (id) => {

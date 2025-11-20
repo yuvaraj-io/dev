@@ -7,11 +7,13 @@ import { redirect } from './commons/common-method';
 import Home from './pages/home';
 import Portfolio from './pages/portfolio';
 import Learn from './pages/learn';
+import Edit from './pages/edit.js'
 import Medium from './pages/medium';
 import Stackblitz from './pages/stackblitz';
 import Contact from './pages/connect-me';
 import Write from './pages/write';
 import About from './pages/about';
+import CreateTopics from './pages/create-topics';
 
 import Footer from './stable-components/Footer';
 
@@ -32,6 +34,8 @@ function App() {
             <Route path="/stackblitz" element={<Stackblitz />} />
             <Route path="/learn" element={<Learn />} />
             <Route path="/write" element={<Write />} />
+            <Route path="/topics" element={<CreateTopics />} />
+            <Route path="/edit" element={<Edit />} />
           </Routes>
 
           

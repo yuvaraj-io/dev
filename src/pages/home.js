@@ -19,7 +19,7 @@ export default function Home(){
         <div className="flex flex-col justify-center w-full">
             <div>   
             <h1 className="pb-2r text-4r mob:text-mainm1">Hi, I'm <span className="text-purple-400">Yuvaraj </span> – Frontend Engineer & UI Specialist</h1>
-                <p className="pb-3r leading-tight font-extralight text-2r">With <span className="text-purple-400">6.5+ years</span> of experience in frontend development, I specialize in crafting high-performance, scalable, and user-friendly web applications. My expertise spans across <span className="text-purple-400">Angular</span>, <span className="text-purple-400">Vue.js</span>, and <span className="text-purple-400">React</span>, ensuring businesses can build, optimize, or migrate old application to new UI framework.</p>
+                <p className="pb-3r leading-tight font-extralight text-2r">With <span className="text-purple-400">7+ years</span> of experience in frontend development, I specialize in crafting high-performance, scalable, and user-friendly web applications. My expertise spans across <span className="text-purple-400">Angular</span>, <span className="text-purple-400">Vue.js</span>, and <span className="text-purple-400">React</span>, ensuring businesses can build, optimize, or migrate old application to new UI framework.</p>
                 <Download />
                 <button className="p-1r px-5 border border-solid border-purple-500 text-1.5r ml-5" onClick={() => redirectToLink('connect')}>Connect me!!</button>
             </div>
@@ -108,7 +108,7 @@ export default function Home(){
                                 className="text-lg text-slate-400 hover:text-blue-500 flex items-center gap-2"
                              >
                                 <MdEmail className="text-blue-500 text-3xl" />
-                                Email: developer@yuvidev.in
+                                Email: yuvarajthecoder@gmail.com
                             </a>
                             <a
                                 href="mailto:yuvarajthecoder@gmail.com"

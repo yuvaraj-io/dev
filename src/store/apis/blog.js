@@ -3,7 +3,7 @@ import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react';
 const blogsApi = createApi({
     reducerPath: 'blogs',
     baseQuery: fetchBaseQuery({
-      baseUrl: window.location.href.includes('localhost') ? 'http://localhost:3300' : 'https://dev-backend-69kv.onrender.com',
+      baseUrl: window.location.href.includes('localhost') ? 'http://localhost:1000' : 'https://dev-backend-69kv.onrender.com',
     //   fetchFn: async (...args)=>{
     //     await pause(1000);
     //     return fetch(...args);
@@ -46,6 +46,25 @@ const blogsApi = createApi({
               }
 
           }),
+
+          putBlog: builder.mutation({
+              query: (data) => {
+                return {
+                  url: '/blogs',
+                  // params: { userId: user.name },
+                  method: 'PUT',
+                  body: {
+                    content: data.blogContent,
+                    collections_id: data.collections_id,
+                    heading:data.blogTitle
+                    // title: faker.commerce.productName(),
+                    // userId: user.id,
+                  },
+                }
+              }
+
+          }),
+
           fetchAllCollections: builder.query({
 
             query: (data) => {
@@ -102,10 +121,66 @@ const blogsApi = createApi({
                     method: 'GET',
                   }
                 },
-              }),
+            }),
+            fetchSections: builder.query({
+                // providesTags: (result, error, data) => {
+                //   console.log(result, error, data);
+                //   // return [result, error, data];
+                // },
+                query: (id) =>{
+                  return {
+                    url: '/sections/' + atob(id),
+                    // params: { userId: user.id },
+                    method: 'GET',
+                  }
+                },
+            }),
+            fetchSectionCollections: builder.query({
+                // providesTags: (result, error, data) => {
+                //   console.log(result, error, data);
+                //   // return [result, error, data];
+                // },
+                query: (id) =>{
+                  return {
+                    url: '/section/collections/' + atob(id),
+                    // params: { userId: user.id },
+                    method: 'GET',
+                  }
+                },
+            }),
+          postSectionCollections: builder.mutation({
+                // providesTags: (result, error, data) => {
+                //   console.log(result, error, data);
+                //   // return [result, error, data];
+                // },
+                query: (payload) =>{
+                  console.log(payload)
+                  return {
+                    url: '/section/collections?' + +new Date(),
+                    // params: { userId: user.id },
+                    method: 'POST',
+                    body:payload
+                  }
+                },
+          }),
+          postSection: builder.mutation({
+                // providesTags: (result, error, data) => {
+                //   console.log(result, error, data);
+                //   // return [result, error, data];
+                // },
+                query: (payload) =>{
+                  console.log(payload)
+                  return {
+                    url: '/sections?' + +new Date(),
+                    // params: { userId: user.id },
+                    method: 'POST',
+                    body:payload
+                  }
+                },
+          }),
         }
     }
 });
 
-export const { useFetchTopicsQuery, useFetchCollectionsQuery, usePostCollectionMutation, usePostBlogMutation, useFetchAllCollectionsQuery, useFetchBlogQuery  } = blogsApi;
+export const { useFetchTopicsQuery, usePutBlogMutation, usePostSectionMutation, usePostSectionCollectionsMutation, useFetchSectionCollectionsQuery, useFetchSectionsQuery, useFetchCollectionsQuery, usePostCollectionMutation, usePostBlogMutation, useFetchAllCollectionsQuery, useFetchBlogQuery  } = blogsApi;
 export { blogsApi}
