@@ -23,7 +23,10 @@ export default function Blogs() {
   
   // Effect to fetch blog after collections load
   useEffect(() => {
-    console.log(sectionCollectionData)
+    console.log(sectionCollectionData);
+    if(learnID && urlBlogID){
+      return
+    }
     if (sectionCollectionData && sectionCollectionData.length > 0) {
       const firstBlogID = sectionCollectionData[0] && sectionCollectionData[0].collections[0] && sectionCollectionData[0].collections[0];   
       handleBlogSelect(firstBlogID);

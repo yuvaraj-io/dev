@@ -28,7 +28,7 @@ export default function ImageEditor({ value, index, remove, onUpdate }) {
             {index}
 
             <div className="border border-green-200 p-4 flex flex-col items-center gap-2">
-                <input type="file" accept="image/png, image/jpeg, image/jpg" onChange={handleImageUpload} />
+                <input type="file" accept="image/png, image/jpeg, image/jpg, image/webp" onChange={handleImageUpload} />
                 
                 {base64Image && (
                     <img src={base64Image} className="w-[500px] h-[350px] object-cover border border-gray-300" alt="Preview" />
