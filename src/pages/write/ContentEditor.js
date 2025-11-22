@@ -8,20 +8,39 @@ const MediumLikeEditor = ({ handleChange, value, index, remove }) => {
   const [linkUrl, setLinkUrl] = useState("");
 
   const editorRef = useRef(null);
-  const savedRangeRef = useRef(null); // 🔴 store selection range here
+  const savedRangeRef = useRef(null);
 
+  /* ---------------------------------
+     1️⃣ FIX CURSOR: Only set innerHTML 
+        when value.content ACTUALLY changes
+  ----------------------------------- */
   useEffect(() => {
-    if (value !== undefined && editorRef.current) {
+    if (
+      editorRef.current &&
+      value?.content !== undefined &&
+      editorRef.current.innerHTML !== value.content
+    ) {
       editorRef.current.innerHTML = value.content || "";
     }
-  }, [value]);
+  }, [value?.content]);
 
+  /* ---------------------------------
+     2️⃣ Update parent only when needed
+  ----------------------------------- */
   const reciveChange = () => {
-    if (editorRef.current) {
-      handleChange(editorRef.current.innerHTML, index);
+    if (!editorRef.current) return;
+
+    const html = editorRef.current.innerHTML;
+
+    // Prevent unnecessary re-render → NO CURSOR JUMP
+    if (html !== value.content) {
+      handleChange(html, index);
     }
   };
 
+  /* ---------------------------------
+     3️⃣ Save selection for toolbar actions
+  ----------------------------------- */
   const handleTextSelection = () => {
     const selection = window.getSelection();
     if (!selection || selection.rangeCount === 0) {
@@ -31,28 +50,32 @@ const MediumLikeEditor = ({ handleChange, value, index, remove }) => {
 
     const range = selection.getRangeAt(0);
 
-    // make sure selection is inside our editor
+    // Ensure selection is inside editor
     if (!editorRef.current.contains(range.commonAncestorContainer)) {
       setShowToolbar(false);
       return;
     }
 
     const selectedText = selection.toString().trim();
-
-    if (selectedText) {
-      savedRangeRef.current = range; // ✅ save the range
-
-      const rect = range.getBoundingClientRect();
-      setToolbarPosition({
-        top: rect.top + window.scrollY - 40,
-        left: rect.left + rect.width / 2,
-      });
-      setShowToolbar(true);
-    } else {
+    if (!selectedText) {
       setShowToolbar(false);
+      return;
     }
+
+    savedRangeRef.current = range;
+
+    const rect = range.getBoundingClientRect();
+    setToolbarPosition({
+      top: rect.top + window.scrollY - 40,
+      left: rect.left + rect.width / 2,
+    });
+
+    setShowToolbar(true);
   };
 
+  /* ---------------------------------
+     4️⃣ Restore selection before execCommand
+  ----------------------------------- */
   const restoreSelection = () => {
     const selection = window.getSelection();
     selection.removeAllRanges();
@@ -60,20 +83,26 @@ const MediumLikeEditor = ({ handleChange, value, index, remove }) => {
     if (savedRangeRef.current) {
       selection.addRange(savedRangeRef.current);
     }
-    if (editorRef.current) {
-      editorRef.current.focus();
-    }
+
+    editorRef.current?.focus();
   };
 
+  /* ---------------------------------
+     5️⃣ Bold / italic / underline
+  ----------------------------------- */
   const applyFormatting = (command) => {
     if (!savedRangeRef.current) return;
 
-    restoreSelection();                         // ✅ restore selection
-    document.execCommand(command, false, null); // bold / italic / underline
+    restoreSelection();
+    document.execCommand(command, false, null);
+
     reciveChange();
     setShowToolbar(false);
   };
 
+  /* ---------------------------------
+     6️⃣ Link Handling
+  ----------------------------------- */
   const handleAddLink = () => {
     setShowLinkInput(true);
   };
@@ -81,7 +110,8 @@ const MediumLikeEditor = ({ handleChange, value, index, remove }) => {
   const insertLink = () => {
     if (!savedRangeRef.current) return;
 
-    restoreSelection(); // ✅ restore selection before creating link
+    restoreSelection();
+
     if (linkUrl.trim()) {
       document.execCommand("createLink", false, linkUrl);
     }
@@ -92,11 +122,15 @@ const MediumLikeEditor = ({ handleChange, value, index, remove }) => {
     setShowToolbar(false);
   };
 
+  /* ---------------------------------
+     7️⃣ Paste Sanitizer (Keep tags → remove attributes except href)
+  ----------------------------------- */
   const handlePaste = (e) => {
     e.preventDefault();
 
     const html = e.clipboardData.getData("text/html");
 
+    // plain text fallback
     if (!html) {
       const text = e.clipboardData.getData("text/plain");
       document.execCommand("insertText", false, text);
@@ -107,7 +141,6 @@ const MediumLikeEditor = ({ handleChange, value, index, remove }) => {
     const parser = new DOMParser();
     const doc = parser.parseFromString(html, "text/html");
 
-    // 🔵 Keep tags, remove all attributes except href on <a>
     doc.body.querySelectorAll("*").forEach((el) => {
       if (el.tagName.toLowerCase() === "a") {
         const href = el.getAttribute("href");
@@ -120,9 +153,13 @@ const MediumLikeEditor = ({ handleChange, value, index, remove }) => {
 
     const cleaned = doc.body.innerHTML;
     document.execCommand("insertHTML", false, cleaned);
+
     reciveChange();
   };
 
+  /* ---------------------------------
+     8️⃣ Render
+  ----------------------------------- */
   return (
     <div className="mt-5" style={{ position: "relative" }}>
       <button
@@ -140,8 +177,8 @@ const MediumLikeEditor = ({ handleChange, value, index, remove }) => {
         suppressContentEditableWarning
         onMouseUp={handleTextSelection}
         onKeyUp={handleTextSelection}
-        onInput={reciveChange}          // 🔁 live updates instead of onBlur
-        onPaste={handlePaste}           // ✅ sanitized paste
+        onInput={reciveChange}
+        onPaste={handlePaste}
         className="text-3r contentEdit"
         style={{
           border: `${
@@ -154,6 +191,9 @@ const MediumLikeEditor = ({ handleChange, value, index, remove }) => {
         }}
       ></div>
 
+      {/* ---------------------------------
+          Toolbar
+      ----------------------------------- */}
       {showToolbar && (
         <div
           className="text-2.5r flex gap-2r"
@@ -170,56 +210,39 @@ const MediumLikeEditor = ({ handleChange, value, index, remove }) => {
           }}
         >
           <button
-            onMouseDown={(e) => e.preventDefault()} // prevent losing selection
+            onMouseDown={(e) => e.preventDefault()}
             onClick={() => applyFormatting("bold")}
-            style={{
-              background: "transparent",
-              border: "none",
-              color: "#fff",
-              cursor: "pointer",
-            }}
+            style={{ background: "transparent", border: "none", color: "#fff" }}
           >
             <b>B</b>
           </button>
           <button
             onMouseDown={(e) => e.preventDefault()}
             onClick={() => applyFormatting("italic")}
-            style={{
-              background: "transparent",
-              border: "none",
-              color: "#fff",
-              cursor: "pointer",
-            }}
+            style={{ background: "transparent", border: "none", color: "#fff" }}
           >
             <i>I</i>
           </button>
           <button
             onMouseDown={(e) => e.preventDefault()}
             onClick={() => applyFormatting("underline")}
-            style={{
-              background: "transparent",
-              border: "none",
-              color: "#fff",
-              cursor: "pointer",
-            }}
+            style={{ background: "transparent", border: "none", color: "#fff" }}
           >
             <u>U</u>
           </button>
           <button
             onMouseDown={(e) => e.preventDefault()}
             onClick={handleAddLink}
-            style={{
-              background: "transparent",
-              border: "none",
-              color: "#fff",
-              cursor: "pointer",
-            }}
+            style={{ background: "transparent", border: "none", color: "#fff" }}
           >
             🔗
           </button>
         </div>
       )}
 
+      {/* ---------------------------------
+          Link Input
+      ----------------------------------- */}
       {showLinkInput && (
         <div
           style={{
