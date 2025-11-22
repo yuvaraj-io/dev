@@ -69,6 +69,11 @@ const MediumLikeEditor = ({handleChange, value, index, remove}) => {
         suppressContentEditableWarning
         onMouseUp={handleTextSelection}
         className="text-3r contentEdit"
+        onPaste={(e) => {
+            e.preventDefault();
+            const text = e.clipboardData.getData("text/plain");
+            document.execCommand("insertText", false, text);
+        }}
         style={{
           border: `${value.type === "subheading" ? '1px solid green' :'1px solid #ccc'}`,
           padding: "10px",
