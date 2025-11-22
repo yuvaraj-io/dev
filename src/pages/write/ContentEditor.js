@@ -1,49 +1,77 @@
-
-
 import React, { useState, useRef, useEffect } from "react";
 import "./custom.module.css";
 
-const MediumLikeEditor = ({handleChange, value, index, remove}) => {
-  
+const MediumLikeEditor = ({ handleChange, value, index, remove }) => {
   const [showToolbar, setShowToolbar] = useState(false);
   const [toolbarPosition, setToolbarPosition] = useState({ top: 0, left: 0 });
   const [showLinkInput, setShowLinkInput] = useState(false);
   const [linkUrl, setLinkUrl] = useState("");
-  const editorRef = useRef();
+
+  const editorRef = useRef(null);
+  const savedRangeRef = useRef(null); // 🔴 store selection range here
 
   useEffect(() => {
-    if (value !== undefined) {
-      editorRef.current.innerHTML = value.content;
+    if (value !== undefined && editorRef.current) {
+      editorRef.current.innerHTML = value.content || "";
     }
-  }, [value]); 
-
+  }, [value]);
 
   const reciveChange = () => {
     if (editorRef.current) {
-      handleChange(editorRef.current.innerHTML, index); // Pass innerHTML to parent
+      handleChange(editorRef.current.innerHTML, index);
     }
   };
- 
+
   const handleTextSelection = () => {
     const selection = window.getSelection();
-    const selectedText = selection.toString();
-    const range = selection.rangeCount ? selection.getRangeAt(0) : null;
+    if (!selection || selection.rangeCount === 0) {
+      setShowToolbar(false);
+      return;
+    }
 
-    if (selectedText && range) {
+    const range = selection.getRangeAt(0);
+
+    // make sure selection is inside our editor
+    if (!editorRef.current.contains(range.commonAncestorContainer)) {
+      setShowToolbar(false);
+      return;
+    }
+
+    const selectedText = selection.toString().trim();
+
+    if (selectedText) {
+      savedRangeRef.current = range; // ✅ save the range
+
       const rect = range.getBoundingClientRect();
       setToolbarPosition({
-        top: rect.top + window.scrollY - 40, // Position toolbar above selection
-        left: rect.left + rect.width / 2, // Center the toolbar horizontally
+        top: rect.top + window.scrollY - 40,
+        left: rect.left + rect.width / 2,
       });
       setShowToolbar(true);
     } else {
-      setShowToolbar(false); // Hide toolbar if no text is selected
+      setShowToolbar(false);
+    }
+  };
+
+  const restoreSelection = () => {
+    const selection = window.getSelection();
+    selection.removeAllRanges();
+
+    if (savedRangeRef.current) {
+      selection.addRange(savedRangeRef.current);
+    }
+    if (editorRef.current) {
+      editorRef.current.focus();
     }
   };
 
   const applyFormatting = (command) => {
-    document.execCommand(command, false, null);
-    setShowToolbar(false); // Hide toolbar after applying formatting
+    if (!savedRangeRef.current) return;
+
+    restoreSelection();                         // ✅ restore selection
+    document.execCommand(command, false, null); // bold / italic / underline
+    reciveChange();
+    setShowToolbar(false);
   };
 
   const handleAddLink = () => {
@@ -51,39 +79,80 @@ const MediumLikeEditor = ({handleChange, value, index, remove}) => {
   };
 
   const insertLink = () => {
+    if (!savedRangeRef.current) return;
+
+    restoreSelection(); // ✅ restore selection before creating link
     if (linkUrl.trim()) {
       document.execCommand("createLink", false, linkUrl);
     }
+
     setShowLinkInput(false);
     setLinkUrl("");
-    setShowToolbar(false); // Hide toolbar after inserting link
+    reciveChange();
+    setShowToolbar(false);
+  };
+
+  const handlePaste = (e) => {
+    e.preventDefault();
+
+    const html = e.clipboardData.getData("text/html");
+
+    if (!html) {
+      const text = e.clipboardData.getData("text/plain");
+      document.execCommand("insertText", false, text);
+      reciveChange();
+      return;
+    }
+
+    const parser = new DOMParser();
+    const doc = parser.parseFromString(html, "text/html");
+
+    // 🔵 Keep tags, remove all attributes except href on <a>
+    doc.body.querySelectorAll("*").forEach((el) => {
+      if (el.tagName.toLowerCase() === "a") {
+        const href = el.getAttribute("href");
+        [...el.attributes].forEach((attr) => el.removeAttribute(attr.name));
+        if (href) el.setAttribute("href", href);
+      } else {
+        [...el.attributes].forEach((attr) => el.removeAttribute(attr.name));
+      }
+    });
+
+    const cleaned = doc.body.innerHTML;
+    document.execCommand("insertHTML", false, cleaned);
+    reciveChange();
   };
 
   return (
-    <div className="mt-5">
-      <button className={`border ${value.type === "subheading" ? 'border-green-400' :'border-red-400'} p-2 rounded`} onClick={() => remove(index)}>Remove</button> {index}
+    <div className="mt-5" style={{ position: "relative" }}>
+      <button
+        className={`border ${
+          value.type === "subheading" ? "border-green-400" : "border-red-400"
+        } p-2 rounded`}
+        onClick={() => remove(index)}
+      >
+        Remove
+      </button>{" "}
+      {index}
       <div
         ref={editorRef}
         contentEditable
-        onBlur={reciveChange}
         suppressContentEditableWarning
         onMouseUp={handleTextSelection}
+        onKeyUp={handleTextSelection}
+        onInput={reciveChange}          // 🔁 live updates instead of onBlur
+        onPaste={handlePaste}           // ✅ sanitized paste
         className="text-3r contentEdit"
-        onPaste={(e) => {
-            e.preventDefault();
-            const text = e.clipboardData.getData("text/plain");
-            document.execCommand("insertText", false, text);
-        }}
         style={{
-          border: `${value.type === "subheading" ? '1px solid green' :'1px solid #ccc'}`,
+          border: `${
+            value.type === "subheading" ? "1px solid green" : "1px solid #ccc"
+          }`,
           padding: "10px",
           borderRadius: "5px",
-          minHeight: `${value.type === "subheading" ? '50px' : '100px'}`,
+          minHeight: `${value.type === "subheading" ? "50px" : "100px"}`,
           cursor: "text",
         }}
-      >
-        
-      </div>
+      ></div>
 
       {showToolbar && (
         <div
@@ -101,6 +170,7 @@ const MediumLikeEditor = ({handleChange, value, index, remove}) => {
           }}
         >
           <button
+            onMouseDown={(e) => e.preventDefault()} // prevent losing selection
             onClick={() => applyFormatting("bold")}
             style={{
               background: "transparent",
@@ -112,6 +182,7 @@ const MediumLikeEditor = ({handleChange, value, index, remove}) => {
             <b>B</b>
           </button>
           <button
+            onMouseDown={(e) => e.preventDefault()}
             onClick={() => applyFormatting("italic")}
             style={{
               background: "transparent",
@@ -123,6 +194,7 @@ const MediumLikeEditor = ({handleChange, value, index, remove}) => {
             <i>I</i>
           </button>
           <button
+            onMouseDown={(e) => e.preventDefault()}
             onClick={() => applyFormatting("underline")}
             style={{
               background: "transparent",
@@ -134,6 +206,7 @@ const MediumLikeEditor = ({handleChange, value, index, remove}) => {
             <u>U</u>
           </button>
           <button
+            onMouseDown={(e) => e.preventDefault()}
             onClick={handleAddLink}
             style={{
               background: "transparent",

@@ -28,6 +28,10 @@ h3.blog-template-div{
     /* color: #c084fc; */
 
 }
+.blog-template-div a{
+    color: #a755f7;
+    text-decoration: underline;
+}
 
 code {
     /* background: #fdfdfd; */
