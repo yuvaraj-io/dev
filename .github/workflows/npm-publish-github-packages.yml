@@ -1,0 +1,52 @@
+name: Build and Deploy
+
+on:
+  push:
+    branches:
+      - master  # Trigger the workflow when changes are pushed to the master branch
+
+jobs:
+  build-and-deploy:
+    runs-on: ubuntu-24.04
+
+    steps:
+      # Step 1: Checkout the repository
+      - name: Checkout code
+        uses: actions/checkout@v3
+
+      # Step 2: Set up Node.js
+      - name: Set up Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: 20  # Use the Node.js version your project requires
+
+      # Step 3: Install dependencies
+      - name: Install dependencies
+        run: npm install --force
+
+      # Step 4: Build the React app
+      - name: Build the app
+        run: npm run build
+      
+      - name: copy htaccess file
+        run: npm run copy-htaccess
+
+      # Step 5: Deploy to the `dist` branch
+      - name: check the folders
+        run: ls
+      - name: checkout to dist
+        run: git checkout --orphan dist
+      - name: check the folders
+        run: ls
+      - name: config git
+        run: |
+          git config --global user.name "GitHub Actions"
+          git config --global user.email "actions@github.com"
+      - name: adding certain folder
+        run: git add ./build
+      - name: commit changes
+        run: git commit -m "push changes"
+      - name: access remote repo
+        run: git remote set-url origin https://x-access-token:${{ secrets.GH_TOKEN }}@github.com/Yuvaraj-2001/dev.git
+      - name: push changes
+        run: git push origin dist --force

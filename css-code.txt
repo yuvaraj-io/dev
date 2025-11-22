@@ -1,0 +1,36 @@
+background: bg-gray-800 
+white: text-slate-200 
+active: purple-500
+dark-line : slate-400
+
+
+Font Size:
+    'h1': ['2.5rem'],
+    'mh1': ['2rem'],
+    's1': ['2rem'],
+    'ms1': ['1.75rem'],
+
+    'main1': ['4.5rem'],
+    'mainm1': ['4.5rem'],
+
+
+Spacing:
+    '1r': '1rem',
+    '1.5r': '1.25rem',
+    '2r': '2rem',
+    '2.5r': '2.5rem',
+    '3r': '3rem',
+    '3.5r': '3.5rem',
+    '4r': '4rem',
+    '4.5r':'4.5rem',
+    '5r': '5rem',
+    '5.5r': '5.5rem',
+    '6r': '6rem',
+    '6.5r': '6.5rem',
+    '7r': '7rem',
+
+line height, lineheight;
+leading-tight
+leading-none
+leading-snug
+leading-relaxed

@@ -1,0 +1,43 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+html{
+    @apply bg-gray-800;
+    font-size: 10px;
+}
+
+.contentEdit a {
+    text-decoration: underline;
+    color: #00ff2b;
+}
+
+.blog-template-div{
+    font-size: 20px;
+}
+
+.blog-template-div ~ div{
+    padding-bottom: 20px;
+}
+
+h3.blog-template-div{
+    padding-top: 20px;
+    padding-bottom: 10px;
+    font-size: 26px !important;
+    font-weight: 800;
+    /* color: #c084fc; */
+
+}
+.blog-template-div a{
+    color: #a755f7;
+    text-decoration: underline;
+}
+
+code {
+    /* background: #fdfdfd; */
+    color: black; 
+    background: #ffffff;
+    /* color: #a855f8; */
+    border-radius: 5px;
+    font-size: 15px;
+}
