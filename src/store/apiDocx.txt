@@ -1,0 +1,19 @@
+
+For Header
+    GET: /topics
+
+For All the Collections
+    GET: /collections
+
+For writing a Blog
+    POST: /collections
+    POST: /blog
+
+For fetching learn
+    POST: /collectionsById/:id
+
+For fetching each Blog -> pass collection ID
+    POST: /blogs/:id
+
+
+
