@@ -27,13 +27,19 @@ export default function AboutMe() {
             </p>
 
             <p className="pt-2r leading-tight font-extralight text-2r mb-2r">
-                I’m now looking for a <span className='text-purple-400'>Lead Frontend Developer</span> role where I can mentor a team, manage deployments, oversee code merges, and proactively identify and resolve application issues. I want to enhance my leadership skills while continuing to build scalable, high-performance applications.
+                I’m now looking for a <span className='text-purple-400'>Fullstack Developer</span> role where I can mentor a team, manage deployments, oversee code merges, and proactively identify and resolve application issues. I want to enhance my leadership skills while continuing to build scalable, high-performance applications.
             </p>
 
             <Download />
 
             <div className='pt-3r'>
                 <Heading icon="-" text="What I Can Offer" />
+                <p className='pt-4 text-2r text-blue-400'>React  (5+ Years Expertise)</p>
+                <ul className="pl-8 list-disc ml-6 mt-3 text-2r leading-tight ">
+                    <li>Capable of building functional React applications</li>
+                    <li>Hands-on experience in developing projects similar to this website </li>
+                    <li>Can develop new applications from scratch with React</li>
+                </ul>
                 <p className='text-2r text-red-400'>Angular (5+ Years Expertise)</p>
 
                 <ul className="pl-8 list-disc ml-6 mt-3 text-2r leading-tight ">
@@ -43,14 +49,7 @@ export default function AboutMe() {
                     <li>End-to-End Application Development – Building scalable, maintainable applications from scratch.</li>
                 </ul>
 
-                <p className='pt-4 text-2r text-blue-400'>React  (Basic Proficiency)</p>
-                <ul className="pl-8 list-disc ml-6 mt-3 text-2r leading-tight ">
-                    <li>Capable of building functional React applications</li>
-                    <li>Hands-on experience in developing projects similar to this website </li>
-                    <li>Can develop new applications from scratch with React</li>
-                </ul>
-
-                <p className='pt-4 text-2r text-green-400'>Vue  (Migration & Development)</p>
+                <p className='pt-4 text-2r text-green-400'>Vue  (5+ Years Expertise)</p>
                 <ul className="pl-8 list-disc ml-6 mt-3 text-2r leading-tight ">
                     <li>Legacy to Vue Migration – Upgrading applications to Vue 2.0 and Vue 3.0</li>
                     <li>New Vue Applications – Developing modern, scalable applications from scratch.</li>
