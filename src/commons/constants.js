@@ -220,6 +220,32 @@ export const medium = {
             "content": "fromEvent is one of the creation operators. fromEvent operator is used to creating an observable from an event-emitting DOM element, an event type, and a selector function to extract the arguments from the event object that the observable will emit.",
             "stackblitz": "https://stackblitz.com/edit/rxjs-operator-fromevent"
         }
+    ],
+    javascript:[
+        {
+            "title": "Lesson 01: Setting Up your Javascript",
+            "medium": "https://medium.com/@yuvaraj.io/javascript-01-setting-up-your-javascript-136fe7c174cc",
+            "content": "JavaScript is a high-level, dynamic scripting language used to build interactive web applications.",
+            // "stackblitz": "https://stackblitz.com/edit/rxjs-operator-of"
+        },
+        {
+            "title": "Lesson 02: Understanding Javscript syntax",
+            "medium": "https://medium.com/@yuvaraj.io/lesson-2-understanding-javscript-syntax-e0e4e07447fd",
+            "content": `Now that you’re all set up and ready, it’s time to take the next exciting step:- ✨ Understanding JavaScript’s syntax — the rules of the game!`,
+            "stackblitz": "https://stackblitz.com/edit/lesson-2-understanding-javscript-syntax?file=script.js"
+        },
+        {
+            "title": "Lesson 03: Comments in JavaScript",
+            "medium": "https://medium.com/@yuvaraj.io/lesson-3-comments-in-javascript-8e35e17f8a4b",
+            "content": `Comments are nothing but the code/text that gets ignored. “Oh that’s concerning right, why do we need ignored code while writing”,So it’s just for help developers make their code more readable, maintaining, remembering what the block of code is about.`,
+            "stackblitz": "https://stackblitz.com/edit/lesson-3-comments-in-javascript?file=script.js"
+        },
+        {
+            "title": "Lesson 04: Variables in JavaScript — var, let, and const",
+            "medium": "https://medium.com/@yuvaraj.io/lesson-4-variables-in-javascript-var-let-and-const-6e47ce5dcc4e",
+            "content": "Variables are the heart of any program — they let you store, update, and use data as your app runs. With the arrival of ES6 (ECMAScript 2015), JavaScript gave us three ways to declare variables: var, let, and const.",
+            "stackblitz": "https://stackblitz.com/edit/lesson-4-variables-in-javascript-var-let-and-const?file=script.js"
+        }
     ]
 
 }

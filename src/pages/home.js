@@ -18,8 +18,10 @@ export default function Home(){
       <div className="py-3r flex gap-10 justify-between mob:flex-col-reverse">
         <div className="flex flex-col justify-center w-full">
             <div>   
-            <h1 className="pb-2r text-4r mob:text-mainm1">Hi, I'm <span className="text-purple-400">Yuvaraj </span> – Frontend Engineer & UI Specialist</h1>
-                <p className="pb-3r leading-tight font-extralight text-2r">With <span className="text-purple-400">7+ years</span> of experience in frontend development, I specialize in crafting high-performance, scalable, and user-friendly web applications. My expertise spans across <span className="text-purple-400">Angular</span>, <span className="text-purple-400">Vue.js</span>, and <span className="text-purple-400">React</span>, ensuring businesses can build, optimize, or migrate old application to new UI framework.</p>
+            <h1 className="pb-2r text-4r mob:text-mainm1">Hi, I'm <span className="text-purple-400">Yuvaraj </span> – Full Stack Developer with Node.js & UI Specialist</h1>
+                <p className="pb-3r leading-tight font-extralight text-2r">
+                    I’m a <span className="text-purple-400">Full Stack Developer with 7+ years</span> of experience delivering scalable, high-performance web applications. My expertise spans <span className="text-purple-400"> <span className="text-red-400">Angular,</span> <span className="text-blue-400">React,</span> <span className="text-green-400">Vue.js</span>, and Node.js/Express, </span> combined with solid experience in <span className="text-green-400">MongoDB </span>and <span className="text-blue-400">SQL</span>.
+                  </p>
                 <Download />
                 <button className="p-1r px-5 border border-solid border-purple-500 text-1.5r ml-5" onClick={() => redirectToLink('connect')}>Connect me!!</button>
             </div>
@@ -69,12 +71,19 @@ export default function Home(){
         <Heading icon="#" text="about-me" line={true} onClick={() => redirectToLink('about')}/>  
         <div className="flex pt-2r gap-4 mob:flex-wrap"> 
           <div className="w-full">
-              <p className="text-2r text-slate-400 leading-snug">I focus on aligning web technical solutions with business UI goals, ensuring that every project meets both functionality and UI needs. From crafting intuitive user interfaces to writing clean, maintainable code, I prioritize efficiency and user experience at every stage.</p>
-              <p className="pt-4r text-2r text-slate-400 leading-snug">Beyond development, I emphasize quality assurance, performance optimization, and seamless deployments. Whether it’s refining existing features or launching new applications, I ensure everything runs smoothly, delivering scalable and reliable solutions for easy long term suport.</p>
+              <p className="text-2r text-slate-400 leading-snug">
+                I’m a full-stack <span className="text-purple-400">(MERN/MEAN)</span> and frontend-focused engineer who builds web applications that align tightly with product and business goals. I combine strong UI/UX thinking with solid backend engineering to deliver solutions that are functional, scalable, and easy to maintain.
+              </p>
+              <p className="pt-4r text-2r text-slate-400 leading-snug">
+                On the frontend, I specialize in creating intuitive user experiences using Angular, Vue.js, and React. On the backend, I work with Node.js, Express, MongoDB, and SQL to build reliable APIs and application architecture.
+              </p>
+              <p className="pt-4r text-2r text-slate-400 leading-snug">
+                Beyond development, I focus on performance, quality assurance, and smooth CI/CD deployments. Whether improving existing features or delivering new applications end-to-end, I ensure the product is fast, stable, and ready for long-term growth.
+              </p>
               <p className="pt-2r text-2r text-purple-400 leading-snug" onClick={() => redirectToLink('about')}>Click here to learn more about me and my workflow</p>
           </div>
           <div className="w-full">
-            <img className="h-full w-full" alt="yuvaraj" src="/assets/profile/yuvaraj.png"/>
+            <img className="h-full w-full" alt="yuvaraj" src="/assets/profile/image.png"/>
           </div>
         </div>
       </div>
